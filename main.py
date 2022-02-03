@@ -63,10 +63,10 @@ class App(ttk.Frame):
                 q = float(q)
                 if w <= 0 or w > 1080:
                     self.spinbox_1.config(text='图像大小无效')
-                elif q < 0 or q > 28:
+                elif q <= 0 or q > 28:
                     self.spinbox_2.config(text='迭代次数无效')
                 else:
-                    qrp.create(q=q, s=s, w=w - 1, xmin=xmin, ymin=ymin)
+                    qrp.create(q=q, s=s, w=w-1, xmin=xmin, ymin=ymin)
 
                     global img, qrp_img
                     img = Image.open('images/temp.png')
@@ -120,41 +120,35 @@ class App(ttk.Frame):
         if item:
             txt = self.treeview.item(item[0], 'text')
             if txt == '2.1.1':
-                self.chapter2_1_1()
-                print('基本图像生成')
+                self.setparam(0, 0, 0, 0, 0, 0)
             elif txt == '2.1.2':
-                self.chapter2_1_2()
-                print('两色化处理')
+                self.setparam(0, 0, 1, 0, 0, 0)
             elif txt == '3.1.1.1':
-                self.chapter3_1_1_1()
-                print('等高线切割方式之一')
+                self.setparam(0, 1, 2, 1, 0, 0)
             elif txt == '3.1.1.2':
-                self.chapter3_1_1_2()
-                print('等高线切割方式之二')
+                self.setparam(0, 2, 3, 1, 0, 0)
+            elif txt == '3.1.2.1':
+                self.setparam(0, 0, 0, 0, 0, 1)
+            elif txt == '3.1.2.2':
+                self.setparam(0, 0, 0, 0, 1, 1)
+            elif txt == '3.1.2.3':
+                self.setparam(0, 3, 8, 1, 0, 0, False)
+            elif txt == '3.2.1':
+                self.setparam(0, 0, 0, 0, 0, 2)
+            elif txt == '3.2.2':
+                self.setparam(0, 0, 0, 0, 1, 2)
+            elif txt == '3.3.1':
+                self.setparam(1, 0, 4, 0, 0, 0)
+            elif txt == '3.3.2':
+                self.setparam(2, 0, 4, 0, 0, 0)
 
-    def chapter2_1_1(self):
+    # set param after selection
+    def setparam(self, color_list_index, split_point_index, k_list_index, mag_index, tp, mtd, is_set=True):
         global qrp
-        qrp = QRP(color_list=cmp.get_color_list(0), split_point=cmp.get_split_point(0), k_list=cmp.get_k_list(0),
-                  mag=cmp.get_mag(0), tp=0, mtd=0)
-        self.combobox.set("颜色模式1")
-
-    def chapter2_1_2(self):
-        global qrp
-        qrp = QRP(color_list=cmp.get_color_list(0), split_point=cmp.get_split_point(0), k_list=cmp.get_k_list(1),
-                  mag=cmp.get_mag(0), tp=0, mtd=0)
-        self.combobox.set("颜色模式2")
-
-    def chapter3_1_1_1(self):
-        global qrp
-        qrp = QRP(color_list=cmp.get_color_list(0), split_point=cmp.get_split_point(1), k_list=cmp.get_k_list(2),
-                  mag=cmp.get_mag(1), tp=0, mtd=0)
-        self.combobox.set("颜色模式3")
-
-    def chapter3_1_1_2(self):
-        global qrp
-        qrp = QRP(color_list=cmp.get_color_list(0), split_point=cmp.get_split_point(2), k_list=cmp.get_k_list(3),
-                  mag=cmp.get_mag(1), tp=0, mtd=0)
-        self.combobox.set("颜色模式4")
+        qrp = QRP(color_list=cmp.get_color_list(color_list_index), split_point=cmp.get_split_point(split_point_index),
+                  k_list=cmp.get_k_list(k_list_index), mag=cmp.get_mag(mag_index), tp=tp, mtd=mtd)
+        if is_set:
+            self.combobox.set(self.combo_list[k_list_index])
 
     # Update label image density
     def getscale_1(self, text):
@@ -172,7 +166,7 @@ class App(ttk.Frame):
         # Create a Frame for the images
         self.image_frame = ttk.LabelFrame(self, text="生成图像", padding=(20, 10))
         self.image_frame.grid(
-            row=0, column=0, padx=(20, 10), pady=(20, 10), sticky="nsew"
+            row=0, column=0, padx=(10, 10), pady=(20, 0), sticky="nsew"
         )
 
         # Create a Frame for show images
@@ -181,7 +175,8 @@ class App(ttk.Frame):
         qrp_img = ImageTk.PhotoImage(img)
         self.image_label = Label(self.image_frame, image=qrp_img, width=570, height=570)
         self.image_label.grid(
-            row=0, column=0, padx=(5, 5), pady=(5, 5), sticky="nsew"
+            row=0, column=0, sticky="nsew"
+            # row = 0, column = 0, padx = (5, 5), pady = (5, 5), sticky = "nsew"
         )
 
         # Create a Frame for input widgets
@@ -316,9 +311,22 @@ class App(ttk.Frame):
             (1, 2, "2.1.1", "基本图形生成"),
             (1, 3, "2.1.2", "两色化处理"),
             ("", 4, "第三章", "准规则斑图模型的色彩变化方法"),
-            (4, 5, "3.1.1", "QBcolor模式等高线变量的控制方法"),
-            (5, 6, "3.1.1.1", "等高线的切割方式之一"),
-            (5, 7, "3.1.1.2", "等高线的切割方式之二"),
+            (4, 5, "3.1", "QBcolor模式等高线变量的控制方法"),
+            (5, 6, "3.1.1", "等高线的切割方式"),
+            (6, 7, "3.1.1.1", "等高线的切割方式之一"),
+            (6, 8, "3.1.1.2", "等高线的切割方式之二"),
+            (5, 9, "3.1.2", "等高线变量的赋值方式"),
+            (9, 10, "3.1.2.1", "等高线变量的赋值方式之一"),
+            (9, 11, "3.1.2.2", "等高线变量的赋值方式之二"),
+            (9, 12, "3.1.2.3", "等高线变量的赋值方式之三"),
+            (4, 13, "3.2", "RGB模式等高线变量的控制方法"),
+            (13, 14, "3.2.1", "等高线变量的控制方式之一"),
+            (13, 15, "3.2.2", "等高线变量的控制方式之二"),
+            (4, 16, "3.3", "切割等高线的RGB色彩值赋值方法"),
+            (16, 17, "3.3.1", "任意切割等高线的具体方法之一"),
+            (16, 18, "3.3.2", "任意切割等高线的具体方法之二"),
+            ("", 19, "第四章", "准规则斑图的参数变化方法"),
+            (19, 20, "", ""),
         ]
 
         # Insert treeview data
@@ -380,7 +388,7 @@ if __name__ == "__main__":
 
     # Simply set the theme
     root.tk.call("source", "azure.tcl")
-    root.tk.call("set_theme", "light")
+    root.tk.call("set_theme", "dark")
 
     app = App(root)
     app.pack(fill="both", expand=True)
