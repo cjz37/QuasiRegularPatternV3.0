@@ -20,7 +20,10 @@ def get_k_list(index):
                14, 12, 14, 0, 11, 3, 0, 1, 13, 9, 14, 12, 0, 9, 1, 15, 14, 4, 9, 13, 3, 2, 9, 0, 1, 12],  # 6
               [2, 7, 9, 15, 4, 2, 11, 6, 8, 1, 12, 10, 14, 5, 13, 2, 11, 10, 1]  # 7
               ]
-    return k_list[index]
+    if index == len(k_list):
+        return random_k_list()
+    else:
+        return k_list[index]
 
 
 def get_split_point(index):
