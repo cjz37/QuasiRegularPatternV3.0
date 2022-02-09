@@ -141,13 +141,91 @@ class App(ttk.Frame):
                 self.setparam(1, 0, 4, 0, 0, 0)
             elif txt == '3.3.2':
                 self.setparam(2, 0, 4, 0, 0, 0)
+            elif txt == '4.1.1':
+                self.setparam(0, 4, 5, 1, 0, 0)
+            elif txt == '4.2.1':
+                self.setparam(0, 0, 0, 0, 1, 0)
+            elif txt == '4.2.2':
+                self.setparam(0, 0, 0, 0, 2, 0)
+            elif txt == '4.2.3':
+                self.setparam(0, 0, 0, 0, 3, 0)
+            elif txt == '4.2.4':
+                self.setparam(0, 0, 0, 0, 4, 0)
+            elif txt == '4.3.1':
+                self.setparam(0, 0, 0, 0, 5, 0)
+            elif txt == '4.3.2':
+                self.setparam(0, 0, 0, 0, 6, 0)
+            elif txt == '4.3.3':
+                self.setparam(0, 0, 0, 0, 7, 0)
+            elif txt == '4.3.4':
+                self.setparam(0, 0, 0, 0, 8, 0)
+            elif txt == '4.3.5':
+                self.setparam(0, 0, 0, 0, 9, 0)
+            elif txt == '5.1.1.1':
+                self.setparam(0, 0, 0, 0, 10, 0)
+            elif txt == '5.1.1.2':
+                self.setparam(0, 0, 0, 0, 11, 0)
+            elif txt == '5.1.1.3':
+                self.setparam(0, 0, 0, 0, 12, 0)
+            elif txt == '5.1.2.1':
+                self.setparam(0, 0, 0, 0, 13, 0)
+            elif txt == '5.2.1.1':
+                self.setparam(0, 0, 0, 0, 14, 0)
+            elif txt == '5.2.1.2':
+                self.setparam(0, 0, 0, 0, 15, 0)
+            elif txt == '5.2.1.3':
+                self.setparam(0, 0, 0, 0, 16, 0)
+            elif txt == '5.2.1.4':
+                self.setparam(0, 0, 0, 0, 17, 0)
+            elif txt == '5.2.1.5':
+                self.setparam(0, 0, 0, 0, 18, 0)
+            elif txt == '5.2.1.6':
+                self.setparam(0, 0, 0, 0, 19, 0)
+            elif txt == '5.2.1.7':
+                self.setparam(0, 0, 0, 0, 20, 0)
+            elif txt == '5.2.1.8':
+                self.setparam(0, 0, 0, 0, 21, 0)
+            elif txt == '5.2.2.1':
+                self.setparam(0, 0, 0, 0, 22, 0)
+            elif txt == '5.2.2.2':
+                self.setparam(0, 0, 0, 0, 23, 0)
+            elif txt == '5.2.2.3':
+                self.setparam(0, 0, 0, 0, 24, 0)
+            elif txt == '5.2.3.1':
+                self.setparam(0, 0, 0, 0, 25, 0)
+            elif txt == '5.2.3.2':
+                self.setparam(0, 0, 0, 0, 26, 0)
+            elif txt == '5.2.4.1':
+                self.setparam(0, 0, 0, 0, 27, 0)
+            elif txt == '5.2.4.2':
+                self.setparam(0, 0, 0, 0, 28, 0)
+            elif txt == '5.2.4.3':
+                self.setparam(0, 0, 0, 0, 29, 0)
+            elif txt == '5.2.4.4':
+                self.setparam(0, 0, 0, 0, 30, 0)
+            elif txt == '5.2.4.5':
+                self.setparam(0, 0, 0, 0, 31, 0)
+            elif txt == '5.3.1.1':
+                self.setparam(0, 5, 6, 0, 32, 0)
+            elif txt == '5.3.1.2':
+                self.setparam(0, 5, 6, 0, 33, 0)
+            elif txt == '5.3.1.3':
+                self.setparam(0, 5, 6, 0, 34, 0)
+            elif txt == '5.3.1.4':
+                self.setparam(0, 5, 6, 0, 35, 0)
+            elif txt == '5.3.1.5':
+                self.setparam(0, 5, 6, 0, 36, 0)
+            elif txt == '5.3.1.6':
+                self.setparam(0, 5, 6, 0, 37, 0)
+            elif txt == '5.3.1.7':
+                self.setparam(0, 5, 6, 0, 38, 0)
 
     # set param after selection
-    def setparam(self, color_list_index, split_point_index, k_list_index, mag_index, tp, mtd, is_set=True):
+    def setparam(self, color_list_index, split_point_index, k_list_index, mag_index, tp, mtd, is_set_combobox=True):
         global qrp
         qrp = QRP(color_list=cmp.get_color_list(color_list_index), split_point=cmp.get_split_point(split_point_index),
                   k_list=cmp.get_k_list(k_list_index), mag=cmp.get_mag(mag_index), tp=tp, mtd=mtd)
-        if is_set:
+        if is_set_combobox:
             self.combobox.set(self.combo_list[k_list_index])
 
     # Update label image density
@@ -176,7 +254,6 @@ class App(ttk.Frame):
         self.image_label = Label(self.image_frame, image=qrp_img, width=570, height=570)
         self.image_label.grid(
             row=0, column=0, sticky="nsew"
-            # row = 0, column = 0, padx = (5, 5), pady = (5, 5), sticky = "nsew"
         )
 
         # Create a Frame for input widgets
@@ -197,7 +274,7 @@ class App(ttk.Frame):
         self.spinbox_1.grid(row=1, column=0, padx=5, pady=10, sticky="ew")
 
         # Spinbox iteration time
-        self.spinbox_2 = ttk.Spinbox(self.widgets_frame, from_=0, to=100, increment=0.1)
+        self.spinbox_2 = ttk.Spinbox(self.widgets_frame, from_=0, to=100, increment=1)
         self.spinbox_2.insert(0, "迭代次数")
         self.spinbox_2.grid(row=2, column=0, padx=5, pady=10, sticky="ew")
 
@@ -326,7 +403,59 @@ class App(ttk.Frame):
             (16, 17, "3.3.1", "任意切割等高线的具体方法之一"),
             (16, 18, "3.3.2", "任意切割等高线的具体方法之二"),
             ("", 19, "第四章", "准规则斑图的参数变化方法"),
-            (19, 20, "", ""),
+            (19, 20, "4.1", "参数q的非整数取值变化方法"),
+            (20, 21, "4.1.1", "q值的非整数取值及其图形生成"),
+            (19, 22, "4.2", "参数i的变化方法"),
+            (22, 23, "4.2.1", "参数i的设计一"),
+            (22, 24, "4.2.2", "参数i的设计二"),
+            (22, 25, "4.2.3", "参数i的设计三"),
+            (22, 26, "4.2.4", "参数i的设计四"),
+            (19, 27, "4.3", "其他参数的变化方法"),
+            (27, 28, "4.3.1", "其他参数设计一"),
+            (27, 29, "4.3.2", "其他参数设计二"),
+            (27, 30, "4.3.3", "其他参数设计三"),
+            (27, 31, "4.3.4", "其他参数设计四"),
+            (27, 32, "4.3.5", "其他参数设计五"),
+            ("", 33, "第五章", "准规则斑图的函数变换方法"),
+            (33, 34, "5.1", "绝对值函数变换"),
+            (34, 35, "5.1.1", "基本模型的绝对值函数变换"),
+            (35, 36, "5.1.1.1", "基本模型的整体变换"),
+            (35, 37, "5.1.1.2", "基本模型的局部变换"),
+            (35, 38, "5.1.1.3", "基本模型的复合变换"),
+            (34, 39, "5.1.2", "结合参数变化的绝对值函数变换"),
+            (39, 40, "5.1.2.1", "与参数变化结合的变换"),
+            (33, 41, "5.2", "三角函数变换"),
+            (41, 42, "5.2.1", "基本模型整体的三角函数变换"),
+            (42, 43, "5.2.1.1", "基本模型整体简单变换一"),
+            (42, 44, "5.2.1.2", "基本模型整体简单变换二"),
+            (42, 45, "5.2.1.3", "基本模型整体简单变换三"),
+            (42, 46, "5.2.1.4", "基本模型整体简单变换四"),
+            (42, 47, "5.2.1.5", "基本模型整体简单变换五"),
+            (42, 48, "5.2.1.6", "基本模型整体简单变换六"),
+            (42, 49, "5.2.1.7", "基本模型整体简单变换七"),
+            (42, 50, "5.2.1.8", "基本模型整体简单变换八"),
+            (41, 51, "5.2.2", "基本模型的局部三角函数变换"),
+            (51, 52, "5.2.2.1", "基本模型的局部函数变换之一"),
+            (51, 53, "5.2.2.2", "基本模型的局部函数变换之二"),
+            (51, 54, "5.2.2.3", "基本模型的局部函数变换之三"),
+            (41, 55, "5.2.3", "基本模型的自变量三角函数变换"),
+            (55, 56, "5.2.3.1", "自变量三角函数变换之一"),
+            (55, 57, "5.2.3.2", "自变量三角函数变换之二"),
+            (41, 58, "5.2.4", "整体、局部以及自变量之间的复合变换"),
+            (58, 59, "5.2.4.1", "整体与局部复合变换之一"),
+            (58, 60, "5.2.4.2", "整体与局部复合变换之二"),
+            (58, 61, "5.2.4.3", "整体与自变量之间的复合变换之一"),
+            (58, 62, "5.2.4.4", "整体与自变量之间的复合变换之二"),
+            (58, 63, "5.2.3.5", "局部与自变量之间的复合变换之一"),
+            (33, 64, "5.3", "幂函数变换"),
+            (64, 65, "5.3.1", "基本模型的整体变换"),
+            (65, 66, "5.3.1.1", "基本模型的整体变换一"),
+            (65, 67, "5.3.1.2", "基本模型的整体变换二"),
+            (65, 68, "5.3.1.3", "基本模型的整体变换三"),
+            (65, 69, "5.3.1.4", "基本模型的整体变换四"),
+            (65, 70, "5.3.1.5", "基本模型的整体变换五"),
+            (65, 71, "5.3.1.6", "基本模型的整体变换六"),
+            (65, 72, "5.3.1.7", "基本模型的整体变换七"),
         ]
 
         # Insert treeview data
@@ -334,13 +463,14 @@ class App(ttk.Frame):
             self.treeview.insert(
                 parent=item[0], index="end", iid=item[1], text=item[2], values=item[3]
             )
-            if item[0] == "" or item[1] in {8, 21}:
+            if item[0] == "":
                 self.treeview.item(item[1], open=True)  # Open parents
 
         # Select and scroll
         self.treeview.selection_set(2)
         # self.treeview.see(7)
 
+        # Click event
         self.treeview.bind('<ButtonRelease-1>', self.tvevent)
 
 
@@ -351,8 +481,8 @@ class QRP:
         self._split_point = split_point
         self._k_list = k_list
         self._mag = mag
-        self._tp = tp
-        self._mtd = mtd
+        self._tp = tp  # index of func: get_*_set(h\k\color)
+        self._mtd = mtd  # method
         self._cImg = None
 
     def create(self, q, s, w, xmin, ymin):
@@ -388,7 +518,7 @@ if __name__ == "__main__":
 
     # Simply set the theme
     root.tk.call("source", "azure.tcl")
-    root.tk.call("set_theme", "dark")
+    root.tk.call("set_theme", "light")
 
     app = App(root)
     app.pack(fill="both", expand=True)
