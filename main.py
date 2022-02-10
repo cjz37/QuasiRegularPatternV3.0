@@ -50,21 +50,25 @@ class App(ttk.Frame):
         print('w={}, q={}, s={}, xmin={}, ymin={}'.format(w, q, s, xmin, ymin))
 
         if q and w:
-            if w == '图像大小' or w == '请输入图像大小':
+            if w == '图像大小' or w == '请输入图像大小' or w == '不得超过2048':
                 self.spinbox_1.delete(0, "end")
                 self.spinbox_1.insert(0, '请输入图像大小')
                 self.spinbox_1.focus()
-            elif q == '迭代次数' or q == '请输入迭代次数':
+            elif q == '迭代次数' or q == '请输入迭代次数' or q == '不得超过28':
                 self.spinbox_2.delete(0, "end")
                 self.spinbox_2.insert(0, '请输入迭代次数')
                 self.spinbox_2.focus()
             else:
                 w = int(w)
                 q = float(q)
-                if w <= 0 or w > 1080:
-                    self.spinbox_1.config(text='图像大小无效')
+                if w <= 0 or w > 2048:
+                    self.spinbox_1.delete(0, "end")
+                    self.spinbox_1.insert(0, '不得超过2048')
+                    self.spinbox_1.focus()
                 elif q <= 0 or q > 28:
-                    self.spinbox_2.config(text='迭代次数无效')
+                    self.spinbox_2.delete(0, "end")
+                    self.spinbox_2.insert(0, '不得超过28')
+                    self.spinbox_2.focus()
                 else:
                     qrp.create(q=q, s=s, w=w-1, xmin=xmin, ymin=ymin)
 
@@ -219,6 +223,32 @@ class App(ttk.Frame):
                 self.setparam(0, 5, 6, 0, 37, 0)
             elif txt == '5.3.1.7':
                 self.setparam(0, 5, 6, 0, 38, 0)
+            elif txt == '5.3.2.1':
+                self.setparam(0, 5, 6, 0, 39, 0)
+            elif txt == '5.3.2.2':
+                self.setparam(0, 5, 6, 0, 40, 0)
+            elif txt == '5.3.2.3':
+                self.setparam(0, 5, 6, 0, 41, 0)
+            elif txt == '5.3.2.4':
+                self.setparam(0, 5, 6, 0, 42, 0)
+            elif txt == '5.3.3.1':
+                self.setparam(0, 5, 6, 0, 43, 0)
+            elif txt == '5.3.3.2':
+                self.setparam(0, 5, 6, 0, 44, 0)
+            elif txt == '5.3.3.3':
+                self.setparam(0, 5, 6, 0, 45, 0)
+            elif txt == '5.3.3.4':
+                self.setparam(0, 5, 6, 0, 46, 0)
+            elif txt == '5.3.4.1':
+                self.setparam(0, 5, 6, 0, 47, 0)
+            elif txt == '5.3.4.2':
+                self.setparam(0, 5, 6, 0, 48, 0)
+            elif txt == '5.3.4.3':
+                self.setparam(0, 5, 6, 0, 49, 0)
+            elif txt == '5.3.4.4':
+                self.setparam(0, 5, 6, 0, 50, 0)
+            elif txt == '5.3.4.5':
+                self.setparam(0, 5, 6, 0, 51, 0)
 
     # set param after selection
     def setparam(self, color_list_index, split_point_index, k_list_index, mag_index, tp, mtd, is_set_combobox=True):
@@ -377,10 +407,10 @@ class App(ttk.Frame):
 
         # Treeview columns
         self.treeview.column("#0", anchor="w", width=120)
-        self.treeview.column(0, anchor="w", width=220)
+        self.treeview.column(0, anchor="w", width=260)
 
         # Treeview headings
-        self.treeview.heading(0, text="         章节", anchor="w")
+        self.treeview.heading(0, text="              章节", anchor="w")
 
         # Define treeview data
         treeview_data = [
@@ -456,6 +486,23 @@ class App(ttk.Frame):
             (65, 70, "5.3.1.5", "基本模型的整体变换五"),
             (65, 71, "5.3.1.6", "基本模型的整体变换六"),
             (65, 72, "5.3.1.7", "基本模型的整体变换七"),
+            (64, 73, "5.3.2", "基本模型的局部变换"),
+            (73, 74, "5.3.2.1", "基本模型的局部变换一"),
+            (73, 75, "5.3.2.2", "基本模型的局部变换二"),
+            (73, 76, "5.3.2.3", "基本模型的局部变换三"),
+            (73, 77, "5.3.2.4", "基本模型的局部变换四"),
+            (64, 78, "5.3.3", "基本模型的自变量变换"),
+            (78, 79, "5.3.3.1", "基本模型的自变量变换一"),
+            (78, 80, "5.3.3.2", "基本模型的自变量变换二"),
+            (78, 81, "5.3.3.3", "基本模型的自变量变换三"),
+            (78, 82, "5.3.3.4", "基本模型的自变量变换四"),
+            (64, 83, "5.3.4", "基本模型的整体、局部与自变量之间的复合变换"),
+            (83, 84, "5.3.4.1", "整体与局部的复合变换"),
+            (83, 85, "5.3.4.2", "整体与自变量的复合变换"),
+            (83, 86, "5.3.4.3", "局部与自变量的复合变换一"),
+            (83, 87, "5.3.4.4", "局部与自变量的复合变换二"),
+            (83, 88, "5.3.4.5", "整体、局部与自变量同时进行的复合变换"),
+
         ]
 
         # Insert treeview data
